@@ -5,6 +5,7 @@ document.getElementById("start_quiz").onclick =  function (e){
 	//Hide the 2 buttons
 	document.getElementById("start_quiz").style.display = "none";
 	document.getElementById("build_quiz").style.display = "none";
+	document.getElementById("saved-quizzes").style.display = "none";
 	//Run the javascript code in the module loader.js
 	loadquiz();
 };
@@ -66,6 +67,7 @@ var loadquiz = (function(){
 		document.getElementById('done_button').remove();
 		document.getElementById("start_quiz").style.display = "";
 		document.getElementById("build_quiz").style.display = "";
+		document.getElementById("saved-quizzes").style.display = "";
 	}
 
 	/*
@@ -119,6 +121,6 @@ var loadquiz = (function(){
 		loadQuiz(listener);
 	}
 
-	var quiz = frenchQuiz;
+	var quiz = myQuiz.getQuiz(); 
 	init();
 });

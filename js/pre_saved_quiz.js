@@ -1,3 +1,7 @@
+/*
+	This is just a pre-saved quiz, hold basic info such as quiz name, and
+	all the question/answers in the quiz. 
+*/
 var frenchQuiz = (function () {
     var allQuestions = [];
 	function quiz_question(question,choices,correctAnswer){

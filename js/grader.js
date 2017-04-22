@@ -4,7 +4,7 @@
 	quiz bank.
 */
 var gradeQuiz = (function (){
-	var quiz = frenchQuiz;
+	var quiz = myQuiz.getQuiz();
 	return {
 		grade : function(answerArr){
 			var correctCounter = 0;
