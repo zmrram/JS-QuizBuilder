@@ -15,17 +15,22 @@ document.getElementById("start_quiz").onclick =  function (e){
 	pre-made quiz from pre_saved_quiz.js
 */
 var loadquiz = (function(){
+
 	//load prev and next button to traverse through the quiz
 	function loadButton(){
 		var prev = document.createElement("button");
 		var next = document.createElement("button");
+		var done = document.createElement("button");
 		prev.id = "prev_button";
 		next.id = "next_button";
+		done.id = "done_button";
 		prev.innerHTML = "Prev";
 		next.innerHTML = "Next";
+		done.innerHTML = "Done";
 		var div = document.getElementById('content-container');
 		div.appendChild(prev);
 		div.appendChild(next);
+		div.appendChild(done);
 	}
 
 	/*
@@ -54,15 +59,33 @@ var loadquiz = (function(){
 		callback(0);
 	}
 
+	function updateScore(score,size) {
+		alert ("YOU GOT " + score + " OUT OF " + size + " QUESTIONS");
+		document.getElementById('next_button').remove();
+		document.getElementById('prev_button').remove();
+		document.getElementById('done_button').remove();
+		document.getElementById("start_quiz").style.display = "";
+		document.getElementById("build_quiz").style.display = "";
+	}
+
+	/*
+		Flip through each question on the quiz. Only one question will be shown at a time.
+	*/
 	function listener(index){
 		var currentQuestionIndex = index;
 		var quizbox = document.getElementById('quiz-container');
 		var next = document.getElementById('next_button');
 		var prev = document.getElementById('prev_button');
+		var done = document.getElementById('done_button');
+		var answerArr = Array.apply(null, Array(quizbox.children.length)).map(String.prototype.valueOf,"");
 		next.onclick = function (e){
 			e.preventDefault();
 			if ((currentQuestionIndex + 1) < quizbox.children.length){
+				//hide the current question
 				quizbox.children[currentQuestionIndex].style.display = "none";
+				//update the answer;
+				answerArr[currentQuestionIndex] = quizbox.children[currentQuestionIndex].elements['choice'].value;
+				//display the next one
 				quizbox.children[currentQuestionIndex + 1].style.display = "";
 				currentQuestionIndex += 1;
 			}
@@ -70,17 +93,32 @@ var loadquiz = (function(){
 		prev.onclick = function (e){
 			e.preventDefault();
 			if ((currentQuestionIndex - 1) >= 0){
+				//hide the current question
 				quizbox.children[currentQuestionIndex].style.display = "none";
+				//update the answer;
+				answerArr[currentQuestionIndex] = quizbox.children[currentQuestionIndex].elements['choice'].value;
+				//display the previous one
 				quizbox.children[currentQuestionIndex - 1].style.display = "";
 				currentQuestionIndex -= 1;
 			}
 		};
+		done.onclick = function (e) {
+			e.preventDefault();
+			//update the current question's answer, as I only update answer when Prev or Next is clicked
+			answerArr[currentQuestionIndex] = quizbox.children[currentQuestionIndex].elements['choice'].value;
+			//remove the quiz from the page
+			while (quizbox.hasChildNodes()) {
+    			quizbox.removeChild(quizbox.lastChild);
+			}
+			updateScore(gradeQuiz.grade(answerArr),answerArr.length);
+		}
 	}
 
 	function init(){
 		loadButton();
 		loadQuiz(listener);
 	}
+
 	var quiz = frenchQuiz;
 	init();
 });

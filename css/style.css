@@ -9,6 +9,11 @@ html {
 	margin-right: auto;
 	margin-top: 10em;
 }
+
+#content-container button {
+	margin-right: 1em;
+}
+
 #quiz-container {
 	width: 70%;
 	max-width: 70%;
