@@ -77,6 +77,7 @@ var buildquiz = (function (e) {
 	}
 
 	function listener(){
+		console.log("hey!!");
 		var add = document.getElementById('add_button');
 		var save = document.getElementById('finish_button');
 		add.onclick = function (e){
@@ -88,11 +89,11 @@ var buildquiz = (function (e) {
 			addQuestion();
 			saveQuiz(updatePage);
 		}
+
 	}
 
 	function init(){
-		savedquizzes = [];
-		allQuestions = [];
+
 		if(typeof(Storage) !== "undefined") {
 	        if (localStorage.savedQuizData) {
 	            savedquizzes = JSON.parse(localStorage.savedQuizData);
@@ -100,12 +101,12 @@ var buildquiz = (function (e) {
 	            localStorage.savedQuizData = [];
 	        }
 	    }
-		loadButton();
-		var builder_form = document.getElementById('quiz-builder-form');
+	    var builder_form = document.getElementById('quiz-builder-form');
 		builder_form.style.visibility = "visible";
+		loadButton();
 		listener();
 	}
-	var savedquizzes;
-	var allQuestions;
+	var savedquizzes = [];
+	var allQuestions = [];
 	init();
 });

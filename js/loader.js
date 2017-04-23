@@ -28,7 +28,6 @@ var loadquiz = (function(){
 	*/
 	function loadQuiz (callback){
 		var quizbox = document.getElementById('quiz-container');
-		console.log(quiz);
 		for (var i = 0 ; i < quiz.content.length; i++){
 			var form = document.createElement('form');
 			form.innerHTML = (i+1) + ". " + quiz.content[i].question;
