@@ -12,7 +12,22 @@
 	</header>
 	<div id = "content-container">
 		<div style="margin-bottom: 1em" class = "clearfix">
-			<div id = 'quiz-container'>
+			<div id = 'left-container'>
+				<div  id = 'quiz-container'></div>
+				<form id = "quiz-builder-form">
+					<label>Question: </label> <input type="text" name="question-input" class = "input">	
+					<label>1. </label> <input type="text" name="option-1" class = "input">
+					<label>2. </label> <input type="text" name="option-2" class = "input">
+					<label>3. </label> <input type="text" name="option-3" class = "input">
+					<label>4. </label> <input type="text" name="option-4" class = "input">
+					<label>Answer</label>
+					<select name="answer-choices" id = "answer">
+				    	<option value="1">1</option>
+				    	<option value="2">2</option>
+				    	<option value="3">3</option>
+				    	<option value="4">4</option>
+				  	</select>
+				</form>
 			</div>
 			<div id = 'built-quiz-container'>
 				<form id = 'saved-quizzes'>
@@ -27,7 +42,25 @@
 </div>
 	<script src ="js/get_quiz.js"></script>
 	<script src ="js/grader.js"></script>
-	<script src = "js/loader.js"></script>
-
+	<script src ="js/loader.js"></script>
+	<script src ="js/builder.js"></script>
+	<script type="text/javascript">	
+		//Add an event listener (onclick) onto the [Start New Quiz] button
+		document.getElementById("start_quiz").onclick =  function (e){
+			e.preventDefault();
+			//Hide the 2 buttons
+			document.getElementById("start_quiz").style.display = "none";
+			document.getElementById("build_quiz").style.display = "none";
+			document.getElementById("saved-quizzes").style.display = "none";
+			//Run the javascript code in the module loader.js
+			loadquiz();
+		};
+		document.getElementById('build_quiz').onclick = function (e){
+			e.preventDefault();
+			document.getElementById("start_quiz").style.display = "none";
+			document.getElementById("build_quiz").style.display = "none";
+			buildquiz();
+		};
+	</script>
 </body>
 </html>

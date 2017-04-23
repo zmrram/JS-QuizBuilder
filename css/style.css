@@ -29,6 +29,7 @@ footer {
    font-size: 2em;
    height:3%;   /* Height of the footer */
    padding-top: 2%;
+   padding-bottom: 1%;
 }
 
 #content-container {
@@ -44,7 +45,7 @@ footer {
 	font-size: 2em;
 }
 
-#quiz-container {
+#left-container {
 	width: 60%;
 	max-width: 60%;
 	height: 20em;
@@ -54,7 +55,7 @@ footer {
 	float: left;
 }
 
-#quiz-container label {
+#left-container label {
 	display: block;
 }
 
@@ -80,3 +81,16 @@ footer {
     height: 0;
 }
 
+.input {
+	width: 70%;
+	font-size: 1em;
+}
+
+#answer {
+	font-size: 0.8em;
+	width: 10%;
+}
+
+#quiz-builder-form {
+	visibility: hidden;
+}

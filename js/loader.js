@@ -1,15 +1,3 @@
-
-//Add an event listener (onclick) onto the [Start New Quiz] button
-document.getElementById("start_quiz").onclick =  function (e){
-	e.preventDefault;
-	//Hide the 2 buttons
-	document.getElementById("start_quiz").style.display = "none";
-	document.getElementById("build_quiz").style.display = "none";
-	document.getElementById("saved-quizzes").style.display = "none";
-	//Run the javascript code in the module loader.js
-	loadquiz();
-};
-
 /*
 	This is a closure of the loader.js, inside this closure I will be doing
 	loading the customize quizes from a localStorage that was build or just load
