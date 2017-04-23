@@ -46,6 +46,29 @@
 	<script src ="js/builder.js"></script>
 	<script type="text/javascript">	
 		//Add an event listener (onclick) onto the [Start New Quiz] button
+		var load_saved_quizzes = (function (){
+			var saved_folder = document.getElementById('saved-quizzes');
+			var saved_quizzes = [];
+			if(typeof(Storage) !== "undefined") {
+        		if (localStorage.savedQuizData) {
+        	    saved_quizzes = JSON.parse(localStorage.savedQuizData);
+        	    console.log(saved_quizzes);
+        		} 
+    		}
+    		else {
+    			alert("Browser doesn't support web storage")
+    		}
+    		for (var i = 0; i < saved_quizzes.length; i++){
+    			var input = document.createElement('input');
+				var label = document.createElement('label');
+				input.type = "radio";
+				input.name = "built_quiz";
+				input.value = saved_quizzes[i].name;
+				label.appendChild(input);
+				label.innerHTML += saved_quizzes[i].name;
+				saved_folder.appendChild(label);
+    		}
+		}());
 		document.getElementById("start_quiz").onclick =  function (e){
 			e.preventDefault();
 			//Hide the 2 buttons
@@ -59,6 +82,7 @@
 			e.preventDefault();
 			document.getElementById("start_quiz").style.display = "none";
 			document.getElementById("build_quiz").style.display = "none";
+			document.getElementById("saved-quizzes").style.display = "none";
 			buildquiz();
 		};
 	</script>

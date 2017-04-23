@@ -4,9 +4,8 @@
 	quiz bank.
 */
 var gradeQuiz = (function (){
-	var quiz = myQuiz.getQuiz();
 	return {
-		grade : function(answerArr){
+		grade : function(quiz,answerArr){
 			var correctCounter = 0;
 			for (var i = 0; i < answerArr.length; i++){
 				if (answerArr[i] === quiz.content[i].correctAnswer){

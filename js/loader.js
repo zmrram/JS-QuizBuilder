@@ -28,6 +28,7 @@ var loadquiz = (function(){
 	*/
 	function loadQuiz (callback){
 		var quizbox = document.getElementById('quiz-container');
+		console.log(quiz);
 		for (var i = 0 ; i < quiz.content.length; i++){
 			var form = document.createElement('form');
 			form.innerHTML = (i+1) + ". " + quiz.content[i].question;
@@ -100,15 +101,16 @@ var loadquiz = (function(){
 			while (quizbox.hasChildNodes()) {
     			quizbox.removeChild(quizbox.lastChild);
 			}
-			updateScore(gradeQuiz.grade(answerArr),answerArr.length);
+			updateScore(gradeQuiz.grade(quiz,answerArr),answerArr.length);
 		}
 	}
 
 	function init(){
+		quiz = myQuiz.getQuiz();
 		loadButton();
 		loadQuiz(listener);
 	}
 
-	var quiz = myQuiz.getQuiz(); 
+	var quiz; 
 	init();
 });
