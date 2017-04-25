@@ -37,7 +37,7 @@ footer {
 	min-width: 40%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 10em;
+	margin-top: 5em;
 }
 
 #content-container button {
@@ -53,6 +53,7 @@ footer {
 	padding: 1em 1em 1em 1em;
 	font-size: 1.6em;
 	float: left;
+	position: relative;
 }
 
 #left-container label {
@@ -70,6 +71,7 @@ footer {
 	border: 1px solid;
 	padding: 1em 1em 1em 1em;
 	float: right;
+	position: relative;
 }
 
 .clearfix:after {
@@ -91,6 +93,20 @@ footer {
 	width: 10%;
 }
 
-#quiz-builder-form {
-	visibility: hidden;
+#front-page-button {
+	margin-bottom: 1em;
+}
+
+#quiz-taking-button {
+	position: absolute;
+	margin-bottom: 1em;
+	bottom: 0;
+	font-size: 0.6em;
+}
+
+.quiz-building-button {
+	position: absolute;
+	margin-bottom: 1em;
+	bottom: 0;
+	font-size: 0.6em;
 }

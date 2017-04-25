@@ -11,6 +11,10 @@
 		<h1>QUIZ BUILDER</h1>
 	</header>
 	<div id = "content-container">
+		<div id = front-page-button>
+			<button id = 'start_quiz'>Start New Quiz</button>
+			<button id = 'build_quiz'>Build Quiz</button>
+		</div>
 		<div style="margin-bottom: 1em" class = "clearfix">
 			<div id = 'left-container'>
 				<div  id = 'quiz-container'></div>
@@ -28,15 +32,26 @@
 				    	<option value="4">4</option>
 				  	</select>
 				</form>
+				<div id = "quiz-taking-button">		
+					<button id = "next_button">Next</button>
+					<button id = "prev_button">Prev</button> 
+					<button id = "done_button">Done</button>
+				</div>
+				<div class = "quiz-building-button">		
+					<button id = "add_button">Add Question</button>
+					<button id = "finish_button">Finish & Save</button>
+					<button id = "back_button">Back</button> 
+				</div>
 			</div>
 			<div id = 'built-quiz-container'>
 				<form id = 'saved-quizzes'>
 					<label><input type="radio" name="built_quiz" value = "presaved quiz">Presaved Quiz</label>
 				</form>
+				<div class = "quiz-building-button">
+					<button id = "delete_button">Delete</button>
+				</div>		
 			</div>
 		</div>
-		<button id = 'start_quiz'>Start New Quiz</button>
-		<button id = 'build_quiz'>Build Quiz</button>
 	</div>
 	<footer>&copy;Copyright 2017 Tin Huynh</footer>
 </div>
@@ -44,7 +59,13 @@
 	<script src ="js/grader.js"></script>
 	<script src ="js/loader.js"></script>
 	<script src ="js/builder.js"></script>
-	<script type="text/javascript">	
+	<script type="text/javascript">
+		document.getElementById("quiz-taking-button").style.display = "none";
+		document.getElementById("quiz-builder-form").style.display = "none";
+		document.getElementById("add_button").style.display = "none";
+		document.getElementById("finish_button").style.display = "none";
+		document.getElementById("delete_button").style.display = "none";
+		document.getElementById('back_button').style.display = "none";
 		//Add an event listener (onclick) onto the [Start New Quiz] button
 		var load_saved_quizzes = (function (){
 			var saved_folder = document.getElementById('saved-quizzes');
@@ -72,17 +93,14 @@
 		document.getElementById("start_quiz").onclick =  function (e){
 			e.preventDefault();
 			//Hide the 2 buttons
-			document.getElementById("start_quiz").style.display = "none";
-			document.getElementById("build_quiz").style.display = "none";
+			document.getElementById("front-page-button").style.visibility = "hidden";
 			document.getElementById("saved-quizzes").style.display = "none";
 			//Run the javascript code in the module loader.js
 			loadquiz();
 		};
 		document.getElementById('build_quiz').onclick = function (e){
 			e.preventDefault();
-			document.getElementById("start_quiz").style.display = "none";
-			document.getElementById("build_quiz").style.display = "none";
-			document.getElementById("saved-quizzes").style.display = "none";
+			document.getElementById("front-page-button").style.visibility = "hidden";
 			buildquiz();
 		};
 	</script>

@@ -1,15 +1,10 @@
 var buildquiz = (function (e) {
 
 	function loadButton(){
-		var add = document.createElement("button");
-		var finish = document.createElement("button");
-		add.id = "add_button";
-		finish.id = "finish_button";
-		add.innerHTML = "Add Question";
-		finish.innerHTML = "Finish & Save";
-		var div = document.getElementById('content-container');
-		div.appendChild(add);
-		div.appendChild(finish);
+		document.getElementById('add_button').style.display = "";
+		document.getElementById('finish_button').style.display = "";
+		document.getElementById('back_button').style.display = "";
+		document.getElementById('delete_button').style.display = "";
 	}
 
 	function addQuestion(){
@@ -57,29 +52,52 @@ var buildquiz = (function (e) {
 		callback(quiz_name);
 	}
 
-	function updatePage(name){
+	function updateSavedQuizzes(name){
+		if (name !== null){
+			var saved_folder = document.getElementById('saved-quizzes');
+			var input = document.createElement('input');
+			var label = document.createElement('label');
+			input.type = "radio";
+			input.name = "built_quiz";
+			label.id = name;
+			input.value = name;
+			label.appendChild(input);
+			label.innerHTML += name;
+			saved_folder.appendChild(label);
+		}
+	}
+
+	function deleteQuiz(){
+		var index = -1;
+		var name = null;
+		var saved_folder = document.getElementById('saved-quizzes');
+		for (var i = 0; i < savedquizzes.length; i++){
+			if (saved_folder.elements['built_quiz'].value === savedquizzes[i].name){
+			index = i;
+			name = saved_folder.elements['built_quiz'].value;
+			}
+		}
+		savedquizzes.splice(index, 1);
+		localStorage.savedQuizData = JSON.stringify(savedquizzes);
+		var deletedquiz = document.getElementById(name);
+		deletedquiz.remove();
+	}
+
+	function returnToMain(){
 		document.getElementById('add_button').style.display = "none";
 		document.getElementById('finish_button').style.display = "none";
-		var builder_form = document.getElementById('quiz-builder-form');
-		builder_form.style.visibility = "hidden";
-		var saved_folder = document.getElementById('saved-quizzes');
-		var input = document.createElement('input');
-		var label = document.createElement('label');
-		input.type = "radio";
-		input.name = "built_quiz";
-		input.value = name;
-		label.appendChild(input);
-		label.innerHTML += name;
-		saved_folder.appendChild(label);
-		document.getElementById("start_quiz").style.display = "";
-		document.getElementById("build_quiz").style.display = "";
-		document.getElementById("saved-quizzes").style.display = "";
+		document.getElementById('back_button').style.display = "none";
+		document.getElementById('delete_button').style.display = "none";
+		document.getElementById('quiz-builder-form').style.display = "none";
+		document.getElementById("front-page-button").style.visibility = "visible";
 	}
 
 	function listener(){
 		console.log("hey!!");
 		var add = document.getElementById('add_button');
 		var save = document.getElementById('finish_button');
+		var deleteB = document.getElementById('delete_button');
+		var back = document.getElementById('back_button');
 		add.onclick = function (e){
 			e.preventDefault();
 			addQuestion();
@@ -87,9 +105,15 @@ var buildquiz = (function (e) {
 		save.onclick = function (e){
 			e.preventDefault();
 			addQuestion();
-			saveQuiz(updatePage);
+			saveQuiz(updateSavedQuizzes);
 		}
-
+		deleteB.onclick = function (e) {
+			e.preventDefault();
+			deleteQuiz();
+		}
+		back.onclick = function (e) {
+			returnToMain();
+		}
 	}
 
 	function init(){
@@ -102,7 +126,7 @@ var buildquiz = (function (e) {
 	        }
 	    }
 	    var builder_form = document.getElementById('quiz-builder-form');
-		builder_form.style.visibility = "visible";
+		builder_form.style.display = "";
 		loadButton();
 		listener();
 	}

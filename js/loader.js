@@ -7,19 +7,7 @@ var loadquiz = (function(){
 
 	//load prev and next button to traverse through the quiz
 	function loadButton(){
-		var prev = document.createElement("button");
-		var next = document.createElement("button");
-		var done = document.createElement("button");
-		prev.id = "prev_button";
-		next.id = "next_button";
-		done.id = "done_button";
-		prev.innerHTML = "Prev";
-		next.innerHTML = "Next";
-		done.innerHTML = "Done";
-		var div = document.getElementById('content-container');
-		div.appendChild(prev);
-		div.appendChild(next);
-		div.appendChild(done);
+		document.getElementById("quiz-taking-button").style.display = "";
 	}
 
 	/*
@@ -50,11 +38,8 @@ var loadquiz = (function(){
 
 	function updateScore(score,size) {
 		alert ("YOU GOT " + score + " OUT OF " + size + " QUESTIONS");
-		document.getElementById('next_button').remove();
-		document.getElementById('prev_button').remove();
-		document.getElementById('done_button').remove();
-		document.getElementById("start_quiz").style.display = "";
-		document.getElementById("build_quiz").style.display = "";
+		document.getElementById("quiz-taking-button").style.display = "none";
+		document.getElementById('front-page-button').style.visibility = "visible";
 		document.getElementById("saved-quizzes").style.display = "";
 	}
 
